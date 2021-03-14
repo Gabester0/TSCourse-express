@@ -24,8 +24,12 @@ router.get('/login', (req: Request, res: Response) =>{
 
 router.post('/login', (req: RequestWithBody, res: Response)=>{
     const { email, password} = req.body;
-    if(email) res.send(email.toUpperCase())
-    else res.status(422).send('You must provide an email')
+    if(email && password && email === 'hi@hi.com' && password === 'hipass'){
+        req.session = { loggedIn: true };
+        res.redirect('/');
+    } else {
+        res.send('Invalid email or password');
+    }
 })
 
 export { router };
