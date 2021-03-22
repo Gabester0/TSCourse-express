@@ -22,7 +22,7 @@ function controller(target: typeof Plane){
         const path = Reflect.getMetadata('path', target.prototype, key)
         console.log(path)
 
-        router.get(path, target.prototype[key]);
+        // router.get(path, target.prototype[key]);
     }
 }
 

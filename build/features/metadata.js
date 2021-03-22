@@ -10,7 +10,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 require("reflect-metadata");
-var loginRoutes_1 = require("../routes/loginRoutes");
 var Plane = /** @class */ (function () {
     function Plane() {
         this.color = 'red';
@@ -38,7 +37,7 @@ function controller(target) {
     for (var key in target.prototype) {
         var path = Reflect.getMetadata('path', target.prototype, key);
         console.log(path);
-        loginRoutes_1.router.get(path, target.prototype[key]);
+        // router.get(path, target.prototype[key]);
     }
 }
 // 1st Lesson, basics of metatdata:
