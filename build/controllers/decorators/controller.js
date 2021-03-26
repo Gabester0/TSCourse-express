@@ -11,7 +11,7 @@ exports.controller = void 0;
 require("reflect-metadata");
 var AppRouter_1 = require("../../AppRouter");
 var MetadataKeys_1 = require("./MetadataKeys");
-function bodyValidators(kyes) {
+function bodyValidators(keys) {
     return function (req, res, next) {
         if (!req.body) {
             res.status(422).send('Invalid request');
@@ -19,8 +19,8 @@ function bodyValidators(kyes) {
         }
         for (var _i = 0, keys_1 = keys; _i < keys_1.length; _i++) {
             var key = keys_1[_i];
-            if (!req.body) {
-                res.status(422).send('Invalid request');
+            if (!req.body[key]) {
+                res.status(422).send("Missing property " + key);
                 return;
             }
         }
@@ -35,10 +35,10 @@ function controller(routePrefix) {
             var path = Reflect.getMetadata(MetadataKeys_1.MetadataKeys.Path, target.prototype, key);
             var method = Reflect.getMetadata(MetadataKeys_1.MetadataKeys.Method, target.prototype, key);
             var middlewares = Reflect.getMetadata(MetadataKeys_1.MetadataKeys.Middleware, target.prototype, key) || [];
-            var requireBodyProps = Reflect.getMetadata(MetadataKeys_1.MetadataKeys.Validator, target.prototype, key) || [];
-            var validator = bodyValidators(requireBodyProps);
+            var requiredBodyProps = Reflect.getMetadata(MetadataKeys_1.MetadataKeys.Validator, target.prototype, key) || [];
+            var validator = bodyValidators(requiredBodyProps);
             if (path) {
-                router[method].apply(router, __spreadArrays(["" + routePrefix + path], middlewares, [routeHandler]));
+                router[method].apply(router, __spreadArrays(["" + routePrefix + path], middlewares, [validator, routeHandler]));
             }
         }
     };
