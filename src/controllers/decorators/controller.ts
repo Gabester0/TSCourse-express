@@ -2,6 +2,13 @@ import 'reflect-metadata';
 import { AppRouter } from '../../AppRouter';
 import { Methods } from './Methods';
 import { MetadataKeys } from './MetadataKeys';
+import { Request, Response, NextFunction, RequestHandler } from 'express';
+
+function bodyValidators(kyes: string): RequestHandler{
+    return function(req: Request, res: Response, next: NextFunction){
+        
+    }
+}
 
 export function controller(routePrefix: string){
     return function(target: Function){
