@@ -18,7 +18,7 @@ function controller(routePrefix) {
             var routeHandler = target.prototype[key];
             var path = Reflect.getMetadata(MetadataKeys_1.MetadataKeys.Path, target.prototype, key);
             var method = Reflect.getMetadata(MetadataKeys_1.MetadataKeys.Method, target.prototype, key);
-            var middlewares = Reflect.getMetadata(MetadataKeys_1.MetadataKeys.Middleware, target, key) || [];
+            var middlewares = Reflect.getMetadata(MetadataKeys_1.MetadataKeys.Middleware, target.prototype, key) || [];
             if (path) {
                 router[method].apply(router, __spreadArrays(["" + routePrefix + path], middlewares, [routeHandler]));
             }

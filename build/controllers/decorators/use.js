@@ -13,7 +13,7 @@ var MetadataKeys_1 = require("./MetadataKeys");
 function use(middleware) {
     return function (target, key, desc) {
         var middlewares = Reflect.getMetadata(MetadataKeys_1.MetadataKeys.Middleware, target, key) || [];
-        Reflect.defineMetadata(MetadataKeys_1.MetadataKeys.Middleware, __spreadArrays(middlewares, [middlewares]), target, key);
+        Reflect.defineMetadata(MetadataKeys_1.MetadataKeys.Middleware, __spreadArrays(middlewares, [middleware]), target, key);
     };
 }
 exports.use = use;
